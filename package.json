@@ -1,0 +1,27 @@
+{
+  "name": "riteshh",
+  "version": "1.0.0",
+  "description": "Ritesh Sharma's business card in your terminal. Run: npx riteshh",
+  "bin": {
+    "riteshh": "index.js"
+  },
+  "files": [
+    "index.js",
+    "card.json"
+  ],
+  "scripts": {
+    "prepublishOnly": "node ../../scripts/sync-card.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "card",
+    "business-card",
+    "npx",
+    "riteshh"
+  ],
+  "author": "Ritesh Sharma <riteshs.connect@gmail.com>",
+  "homepage": "https://riteshh.in",
+  "license": "MIT"
+}
