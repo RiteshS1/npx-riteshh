@@ -176,9 +176,9 @@ class Story {
   key(k) {
     if (k.name !== "space" && k.name !== "enter") return;
     if (!this.tw.done) return this.tw.skip();
-    this.i++;
-    if (this.i >= this.def.lines.length) this.done = true;
-    else this.tw = new Typewriter(this.def.lines[this.i][1], 45);
+    // Stay on the last line once done: the end screen still draws this stage.
+    if (this.i + 1 >= this.def.lines.length) this.done = true;
+    else this.tw = new Typewriter(this.def.lines[++this.i][1], 45);
   }
   update(dt) {
     this.t += dt;

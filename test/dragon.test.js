@@ -1,10 +1,14 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { Dragon } from "../src/games/dragon.js";
+import { Screen } from "../src/engine/screen.js";
 
 const key = (name) => ({ name, ch: "", ctrl: false });
 
 /** Play the whole tale with a dumb bot and bottomless hearts. */
+const screen = new Screen(80, 24);
+const app = { w: 80, h: 24 };
+
 function playthrough(choice) {
   const g = new Dragon();
   g.state = "play";
@@ -30,7 +34,9 @@ function playthrough(choice) {
       else if (b.tired) g.key(key("space"));
     }
     g.update(dt);
+    g.render(screen, app); // drawing every frame catches stale-stage crashes
   }
+  g.render(screen, app);
   return { g, seen };
 }
 

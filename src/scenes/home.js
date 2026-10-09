@@ -8,6 +8,8 @@ import { Profile } from "./profile.js";
 import { Arcade } from "./arcade.js";
 import { Outro } from "./outro.js";
 
+const host = (url) => url.replace(/^https?:\/\//, "");
+
 const ITEMS = [
   ["about", "who's this guy"],
   ["experience", "where I've shipped"],
@@ -73,7 +75,7 @@ export class Home {
     let x = x0;
     x += scr.text(x, y, p.name, C.paper, BOLD);
     x += scr.text(x, y, "  ·  ", C.faint);
-    scr.text(x, y, `@${p.handle}`, C.thread);
+    scr.text(x, y, host(p.website), C.thread);
     x = x0;
     x += scr.text(x, y + 1, p.role.toLowerCase(), C.text);
     x += scr.text(x, y + 1, "  ·  ", C.faint);

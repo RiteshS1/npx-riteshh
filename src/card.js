@@ -13,10 +13,12 @@ export function renderCard(profile, level) {
   const dim = esc("2");
   const ital = esc("3");
 
+  const site = profile.website.replace(/^https?:\/\//, "");
+
   /* Rows as [plain, styled]; widths come from the plain text so the box
    * stays aligned whatever the escapes add. */
   const rows = [
-    [`${profile.name}  ·  @${profile.handle}`, `${bold(profile.name)}  ${dim("·")}  ${thread(`@${profile.handle}`)}`],
+    [`${profile.name}  ·  ${site}`, `${bold(profile.name)}  ${dim("·")}  ${thread(site)}`],
     [profile.role, profile.role],
     [profile.tagline, ital(dim(profile.tagline))],
     ["", ""],
