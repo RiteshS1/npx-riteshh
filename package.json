@@ -1,16 +1,21 @@
 {
   "name": "riteshh",
-  "version": "1.0.0",
-  "description": "Ritesh Sharma's business card in your terminal. Run: npx riteshh",
+  "version": "2.0.0",
+  "description": "Ritesh Sharma in your terminal: an animated profile, a sakura tree, and a tiny arcade. Run: npx riteshh",
+  "type": "module",
   "bin": {
     "riteshh": "index.js"
   },
   "files": [
     "index.js",
-    "card.json"
+    "src",
+    "data"
   ],
   "scripts": {
-    "prepublishOnly": "node ../../scripts/sync-card.mjs"
+    "start": "node index.js",
+    "test": "node --test",
+    "sync": "node scripts/sync-profile.mjs",
+    "prepublishOnly": "node scripts/sync-profile.mjs && node --test"
   },
   "engines": {
     "node": ">=18"
@@ -19,6 +24,11 @@
     "card",
     "business-card",
     "npx",
+    "cli",
+    "terminal-game",
+    "snake",
+    "galaga",
+    "roguelike",
     "riteshh"
   ],
   "author": "Ritesh Sharma <riteshs.connect@gmail.com>",
