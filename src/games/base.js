@@ -29,6 +29,12 @@ export class Game {
   overLines() {
     return [`score ${this.score ?? 0}`];
   }
+  overTitle() {
+    return null;
+  }
+  overKeys() {
+    return "r again   esc back";
+  }
   onReadyKey() {}
 
   key(k, app) {
@@ -83,7 +89,7 @@ export class Game {
 
     if (this.state === "ready") this.overlay(scr, ox, oy, [[this.title, C.paper, BOLD], ...this.readyLines(), ["q back", C.faint]]);
     if (this.state === "paused") this.overlay(scr, ox, oy, [["paused", C.paper, BOLD], "space resume   q quit"]);
-    if (this.state === "over") this.overlay(scr, ox, oy, [["game over", C.thread, BOLD], ...this.overLines(), ["r again   esc back", C.faint]]);
+    if (this.state === "over") this.overlay(scr, ox, oy, [this.overTitle() || ["game over", C.thread, BOLD], ...this.overLines(), [this.overKeys(), C.faint]]);
   }
 
   /** Draw text clipped to the playfield; x, y are field coordinates. */
