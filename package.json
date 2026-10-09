@@ -33,5 +33,12 @@
   ],
   "author": "Ritesh Sharma <riteshs.connect@gmail.com>",
   "homepage": "https://riteshh.in",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RiteshS1/npx-riteshh.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RiteshS1/npx-riteshh/issues"
+  },
   "license": "MIT"
 }

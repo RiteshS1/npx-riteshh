@@ -1,0 +1,40 @@
+# Publish to npm when a version tag is pushed: git tag v2.0.1 && git push --tags
+# Auth is npm trusted publishing (OIDC), so there's no NPM_TOKEN secret.
+# Provenance is attached automatically.
+
+name: publish
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  id-token: write # mint the OIDC token npm trusts
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      # Trusted publishing needs npm >= 11.5.1.
+      - run: npm install -g npm@latest
+
+      - name: Tag matches package.json version
+        run: |
+          v=$(node -p "require('./package.json').version")
+          if [ "v$v" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::tag $GITHUB_REF_NAME doesn't match package.json version $v"
+            exit 1
+          fi
+
+      # No dependencies, so nothing to install. prepublishOnly runs the
+      # tests; the profile sync is skipped here (the portfolio isn't in this
+      # repo), so data/profile.json ships as committed.
+      - run: npm publish
