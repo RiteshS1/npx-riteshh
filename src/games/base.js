@@ -86,6 +86,17 @@ export class Game {
     if (this.state === "over") this.overlay(scr, ox, oy, [["game over", C.thread, BOLD], ...this.overLines(), ["r again   esc back", C.faint]]);
   }
 
+  /** Draw text clipped to the playfield; x, y are field coordinates. */
+  put(scr, ox, oy, x, y, str, fg, attr = 0) {
+    y = Math.round(y);
+    if (y < 0 || y >= this.fieldH) return;
+    let i = 0;
+    for (const c of str) {
+      const cx = Math.round(x) + i++;
+      if (cx >= 0 && cx < this.fieldW && c !== " ") scr.set(ox + cx, oy + y, c, fg, undefined, attr);
+    }
+  }
+
   /** Centred box over the field. Lines are strings or [text, fg, attr]. */
   overlay(scr, ox, oy, lines) {
     const rows = lines.map((l) => (typeof l === "string" ? [l, C.text, 0] : l));
